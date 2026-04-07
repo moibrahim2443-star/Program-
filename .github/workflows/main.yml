@@ -10,16 +10,18 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip build-essential git python3-setuptools libffi-dev ssl-cert
-          # تثبيت Cython و Buildozer
+          # تثبيت الأدوات بنسخ محددة لضمان التوافق
           pip3 install --user --upgrade Cython==0.29.33 buildozer
 
       - name: Build with Buildozer
         run: |
-          # تشغيل البناء مع المسار الصحيح
+          # تنظيف أي ملفات قديمة وبدء بناء جديد ونظيف
+          /home/runner/.local/bin/buildozer android clean
           yes | /home/runner/.local/bin/buildozer android debug
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: My-Android-App
+          name: My-Final-App
           path: bin/*.apk
+          
