@@ -5,7 +5,8 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy==2.2.1,kivymd==1.1.1,edge-tts,asyncio,certifi,urllib3==1.26.15
+# التعديل هنا: ضفنا كل المكتبات اللي التطبيق محتاجها عشان ميقفش
+requirements = python3,kivy==2.2.1,kivymd==1.1.1,edge-tts,asyncio,certifi,urllib3==1.26.15,chardet,idna
 orientation = portrait
 android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
 android.accept_sdk_license = True
