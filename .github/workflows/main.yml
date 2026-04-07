@@ -9,16 +9,17 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pip build-essential git python3-setuptools colorama libffi-dev ssl-cert
-          pip3 install --user --upgrade buildozer tools-versatile
+          sudo apt-get install -y python3-pip build-essential git python3-setuptools libffi-dev ssl-cert
+          pip3 install --user --upgrade buildozer
 
       - name: Build with Buildozer
         run: |
-          # تجهيز بيئة العمل وبدء البناء
-          yes | buildozer android debug
+          # بناء التطبيق مع الموافقة التلقائية على الرخص
+          yes | /home/runner/.local/bin/buildozer android debug
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: My-Android-App
           path: bin/*.apk
+          
