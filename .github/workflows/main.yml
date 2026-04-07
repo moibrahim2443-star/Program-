@@ -1,4 +1,4 @@
-name: Build
+name: Build APK
 on: [push, pull_request]
 jobs:
   build:
@@ -6,13 +6,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build APK with Buildozer
-        uses: ArtemSerebriakov/buildozer-action@v1
-        with:
-          command: buildozer android debug
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip build-essential git python3-setuptools colorama libffi-dev ssl-cert
+          pip3 install --user --upgrade buildozer tools-versatile
 
+      - name: Build with Buildozer
+        run: |
+          # تجهيز بيئة العمل وبدء البناء
+          yes | buildozer android debug
+        
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: my-app-bundle
+          name: My-Android-App
           path: bin/*.apk
